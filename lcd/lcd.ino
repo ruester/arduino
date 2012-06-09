@@ -132,14 +132,12 @@ void lcd_init()
 #endif
 }
 
-void lcd_write(char *s)
+void lcd_write(String s)
 {
-    char *c;
+    int i;
 
-    c = s;
-
-    while (*c) {
-        switch (*c) {
+    for (i = 0; s[i]; i++) {
+        switch (s[i]) {
             case '0':
                 lcd_send(LOW, LOW, LOW, LOW, HIGH, HIGH, LOW, LOW, HIGH, LOW);
                 break;
@@ -164,8 +162,6 @@ void lcd_write(char *s)
                  lcd_send(LOW, LOW, LOW, LOW, HIGH, LOW, LOW, LOW, HIGH, LOW);
                  break;
         }
-
-        c++;
     }
 }
 
