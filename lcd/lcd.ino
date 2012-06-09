@@ -154,11 +154,11 @@ void lcd_write(String s)
                 lcd_send(HIGH, LOW, HIGH, HIGH, LOW, LOW, HIGH, LOW, HIGH, LOW);
                 break;
 
-             case 'O':
+            case 'O':
                  lcd_send(HIGH, HIGH, HIGH, HIGH, LOW, LOW, HIGH, LOW, HIGH, LOW);
                  break;
 
-             case ' ':
+            case ' ':
                  lcd_send(LOW, LOW, LOW, LOW, HIGH, LOW, LOW, LOW, HIGH, LOW);
                  break;
         }
