@@ -132,37 +132,14 @@ void lcd_init()
 #endif
 }
 
-void lcd_write(String s)
+void lcd_print(String s)
 {
     int i;
 
-    for (i = 0; s[i]; i++) {
-        switch (s[i]) {
-            case '0':
-                lcd_send(LOW, LOW, LOW, LOW, HIGH, HIGH, LOW, LOW, HIGH, LOW);
-                break;
-
-            case 'D':
-                lcd_send(LOW, LOW, HIGH, LOW, LOW, LOW, HIGH, LOW, HIGH, LOW);
-                break;
-
-            case 'E':
-                lcd_send(HIGH, LOW, HIGH, LOW, LOW, LOW, HIGH, LOW, HIGH, LOW);
-                break;
-
-            case 'M':
-                lcd_send(HIGH, LOW, HIGH, HIGH, LOW, LOW, HIGH, LOW, HIGH, LOW);
-                break;
-
-            case 'O':
-                 lcd_send(HIGH, HIGH, HIGH, HIGH, LOW, LOW, HIGH, LOW, HIGH, LOW);
-                 break;
-
-            case ' ':
-                 lcd_send(LOW, LOW, LOW, LOW, HIGH, LOW, LOW, LOW, HIGH, LOW);
-                 break;
-        }
-    }
+    for (i = 0; s[i]; i++)
+        lcd_send(s[i] & 1,  s[i] & 2,  s[i] & 4,  s[i] & 8,
+                 s[i] & 16, s[i] & 32, s[i] & 64, s[i] & 128,
+                 HIGH, LOW);
 }
 
 void init_pin_modes()
@@ -196,7 +173,7 @@ void loop()
     static int mode = 0;
 
     if (mode == 0)
-        lcd_write("MODE 0");
+        lcd_print("Hello World!");
 
     mode++;
 
