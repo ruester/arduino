@@ -142,6 +142,21 @@ void lcd_print(String s)
                  HIGH, LOW);
 }
 
+void gotoxy(int x, int y)
+{
+    if (x >= 40)
+        return;
+
+    if (y)
+        x |= 0b01000000;
+
+    x |= 0b10000000;
+
+    lcd_send(x & 1,  x & 2,  x & 4,  x & 8,
+             x & 16, x & 32, x & 64, x & 128,
+             LOW, LOW);
+}
+
 void init_pin_modes()
 {
     pinMode(D0, OUTPUT);
